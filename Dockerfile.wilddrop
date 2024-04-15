@@ -1,4 +1,4 @@
-FROM --platform=amd64 mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM --platform=linux/amd64 mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG TARGETARCH
 WORKDIR /src
 
@@ -13,7 +13,7 @@ COPY libs/storage/Tsavorite/cs/src/devices/AzureStorageDevice/*.csproj libs/stor
 COPY main/GarnetServer/*.csproj main/GarnetServer/
 COPY metrics/HdrHistogram/*.csproj metrics/HdrHistogram/
 
-RUN dotnet restore main/GarnetServer/GarnetServer.csproj -a $TARGETARCH
+RUN dotnet restore main/GarnetServer/GarnetServer.csproj -a amd64
 
 # Copy everthing else and publish app
 COPY Garnet.snk Garnet.snk
@@ -23,7 +23,7 @@ COPY metrics/ metrics/
 COPY test/testcerts test/testcerts
 
 WORKDIR /src/main/GarnetServer
-RUN dotnet publish -a $TARGETARCH -c Release -o /app --no-restore --self-contained false -f net8.0
+RUN dotnet publish -a amd64 -c Release -o /app --no-restore --self-contained false -f net8.0
 
 # Final stage/image
 FROM mcr.microsoft.com/dotnet/runtime:8.0 AS runtime
