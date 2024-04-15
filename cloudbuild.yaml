@@ -2,7 +2,9 @@ steps:
   - name: "gcr.io/cloud-builders/docker"
     args:
       [
-        "buildx",
+        "build",
+        "--platform",
+        "linux/amd64",
         "-t",
         "gcr.io/graphite-setup-363211/github.com/tam-labs/garnet:$COMMIT_SHA",
         ".",
