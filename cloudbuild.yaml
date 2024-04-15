@@ -5,6 +5,10 @@ steps:
         "build",
         "--platform",
         "linux/amd64",
+        "--build-arg",
+        "BUILDPLATFORM=linux/amd64",
+        "--build-arg",
+        "TARGETARCH=amd64""
         "-t",
         "gcr.io/graphite-setup-363211/github.com/tam-labs/garnet:$COMMIT_SHA",
         ".",
