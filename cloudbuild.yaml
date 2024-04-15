@@ -1,3 +1,9 @@
 steps:
   - name: "gcr.io/cloud-builders/docker"
-    args: ["buildx", "-t", "gcr.io/tubbly/garnet-test", "."]
+    args:
+      [
+        "buildx",
+        "-t",
+        "gcr.io/graphite-setup-363211/github.com/tam-labs/garnet:$COMMIT_SHA",
+        ".",
+      ]
